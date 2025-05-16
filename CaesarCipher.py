@@ -21,6 +21,20 @@ def encode(message, key):
 #def decode(message, key):
     #We will want to decode the message here.
 
+def decode(message, key):
+    alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    message = message.upper()
+    secret = ""
+
+    for letter in message:
+        if (alpha.find(letter) >= 0):  # check to see if the letter is actually a letter
+            spot = (alpha.find(letter) - key) % 26
+            secret = secret + alpha[spot]
+        else:  # letter must have been a number, symbol, or punctuation.
+            secret = secret + letter
+
+    return secret
+
 def main():
     message = input("Enter a message: ")
     key = int(input("Enter a key: "))
